@@ -10,11 +10,12 @@ var http = require('http');
 var connection = require('./lib/connection_pool.js');
 var conf = require('./conf.js');
 
-var INSERT_MYSQL = 'INSERT INTO '+conf.table+' (user_id) VALUES (NULL);'
+var INSERT_MYSQL = 'INSERT INTO '+conf.table+' (user_id,serv_id) VALUES (NULL,?);'
 
 http.createServer(function(request, response){
 
-    connection(INSERT_MYSQL, [], response, null, function(err, res, next, result){
+    console.log(request.url);
+    connection(INSERT_MYSQL, [request.url], response, null, function(err, res, next, result){
         if(err||!result.insertId){
             response.writeHead(200, {"Content-Type":"text/plain"});
             response.write(JSON.stringify({'err':'error'}));
