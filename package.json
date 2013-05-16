@@ -2,6 +2,7 @@
     "name" : "xinmei_uid",
     "version" : "0.0.1",
     "author" : "carmack.shi",
+    "description" : "for xinmei usage"
     "dependencies" : {
         "mysql" : "*",
         "generic-pool" : "*",
