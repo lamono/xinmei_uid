@@ -14,8 +14,8 @@ var INSERT_MYSQL = 'INSERT INTO '+conf.table+' (user_id,serv_id) VALUES (NULL,?)
 
 http.createServer(function(request, response){
 
-    console.log(request.url);
-    connection(INSERT_MYSQL, [request.url], response, null, function(err, res, next, result){
+    var serv = request.url.split('/');
+    connection(INSERT_MYSQL, [serv[serv.length-1]], response, null, function(err, res, next, result){
         if(err||!result.insertId){
             response.writeHead(200, {"Content-Type":"text/plain"});
             response.write(JSON.stringify({'err':'error'}));
